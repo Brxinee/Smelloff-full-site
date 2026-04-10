@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#080808">
+<title>Why Your Clothes Smell Even After Washing | Smelloff Blog</title>
+<meta name="description" content="Washed yesterday. Folded neatly. Put it on this morning. By noon, it smells. Turns out, washing isn't the magic bullet most people think.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,800;0,900;1,900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080808;--bg2:#101010;--acid:#B8FF57;--w:#fff;--g:#8a8a8a;--g2:#2a2a2a;--max:1440px;--pad:clamp(20px,5vw,80px);--hd:'Barlow Condensed',Impact,sans-serif;--bd:'DM Sans',system-ui,sans-serif}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--bd);background:var(--bg);color:var(--w);overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--acid);color:var(--bg)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.04;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* Cursor */
+.cg{position:fixed;top:0;left:0;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(184,255,87,.2) 0%,transparent 60%);pointer-events:none;z-index:2;margin:-250px 0 0 -250px;mix-blend-mode:screen;display:none;will-change:transform}
+@media(hover:hover)and(pointer:fine){.cg{display:block}}
+
+/* Nav */
+.nv{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px var(--pad);display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+.nv.sc{background:rgba(8,8,8,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--g2)}
+.nv-l{font-family:var(--hd);font-weight:900;font-size:26px;display:flex;align-items:center;gap:8px}
+.nv-l::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--acid);box-shadow:0 0 16px var(--acid);animation:pu 2s ease-in-out infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.5}}
+.nv-links{display:none;gap:32px}
+@media(min-width:900px){.nv-links{display:flex}}
+.nv-links a{font-family:var(--hd);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--g);transition:color .3s}
+.nv-links a:hover{color:var(--acid)}
+.nv-c{font-family:var(--hd);font-weight:800;font-size:14px;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px;border:1.5px solid var(--w);border-radius:100px;transition:background .3s,color .3s,border-color .3s}
+.nv-c:hover{background:var(--acid);color:var(--bg);border-color:var(--acid)}
+.burger{display:flex;flex-direction:column;gap:5px;width:32px;height:32px;justify-content:center;align-items:center}
+@media(min-width:900px){.burger{display:none}}
+.burger span{width:22px;height:2px;background:var(--w);transition:transform .3s,opacity .3s}
+.mob-menu{position:fixed;top:0;right:0;bottom:0;width:80%;max-width:320px;background:var(--bg2);border-left:1px solid var(--g2);padding:100px 32px 32px;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:99;display:flex;flex-direction:column;gap:24px}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{font-family:var(--hd);font-weight:800;font-size:18px;letter-spacing:.1em;text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--g2)}
+
+/* Btn */
+.btn{font-family:var(--hd);font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase;padding:20px 36px;border-radius:100px;display:inline-flex;align-items:center;gap:12px;transition:background .3s,color .3s,border-color .3s,box-shadow .3s;white-space:nowrap}
+.bp{background:var(--acid);color:var(--bg)}.bp:hover{background:var(--w);box-shadow:0 0 50px rgba(184,255,87,.45)}
+.bg{border:1.5px solid var(--g2);color:var(--w)}.bg:hover{border-color:var(--acid);color:var(--acid)}
+.ba{font-size:18px;transition:transform .3s;display:inline-block}.btn:hover .ba{transform:translateX(5px)}
+
+/* Section */
+.sc{padding:140px var(--pad);position:relative;z-index:5}
+.si{max-width:var(--max);margin:0 auto}
+.ey{font-family:var(--hd);font-weight:800;font-size:14px;letter-spacing:.25em;text-transform:uppercase;color:var(--acid);margin-bottom:32px;display:inline-flex;align-items:center;gap:14px}
+.ey::before{content:'';width:48px;height:1px;background:var(--acid)}
+.st{font-family:var(--hd);font-weight:900;font-size:clamp(56px,9vw,140px);line-height:.85;letter-spacing:-.025em;text-transform:uppercase;margin-bottom:64px}
+.st em,.ac{color:var(--acid);font-style:italic;font-weight:900}
+
+/* Marquee */
+.mq{background:var(--acid);color:var(--bg);padding:28px 0;overflow:hidden;z-index:5;border-top:2px solid var(--bg);border-bottom:2px solid var(--bg);position:relative}
+.mq-t{display:flex;white-space:nowrap;font-family:var(--hd);font-weight:900;font-style:italic;font-size:clamp(36px,5vw,72px);letter-spacing:-.01em;text-transform:uppercase;will-change:transform}
+.mq-t>span{display:inline-flex;align-items:center;gap:48px;padding-right:48px;flex-shrink:0}
+.mq-d{width:18px;height:18px;background:var(--bg);border-radius:50%;display:inline-block;flex-shrink:0}
+
+/* Product grid */
+.pg{display:grid;grid-template-columns:1fr;gap:60px;align-items:center}
+@media(min-width:900px){.pg{grid-template-columns:1fr 1fr;gap:80px}}
+
+/* Bottle container */
+.bwrap{position:relative;width:100%;min-height:500px;display:flex;align-items:center;justify-content:center;border:1px solid var(--g2);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#0c0c0c 0%,#080808 50%,#0a0f06 100%)}
+.bwrap::before{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(184,255,87,.5) 0%,rgba(184,255,87,0) 65%);filter:blur(60px);animation:br 5s ease-in-out infinite;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+@keyframes br{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-50%,-50%) scale(1.2);opacity:1}}
+.bsvg{position:relative;z-index:2;width:220px;height:auto;filter:drop-shadow(0 0 40px rgba(184,255,87,.3)) drop-shadow(0 30px 50px rgba(0,0,0,.7))}
+@media(min-width:700px){.bsvg{width:260px}}
+
+/* Footer horizontal */
+.ft{background:var(--bg2);padding:60px var(--pad) 24px;border-top:1px solid var(--g2);position:relative;z-index:5}
+.ft-top{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid var(--g2)}
+.ft-b{font-family:var(--hd);font-weight:900;font-size:28px;display:flex;align-items:center;gap:8px}
+.ft-b::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--acid);box-shadow:0 0 12px var(--acid)}
+.ft-ns{display:flex;gap:8px;flex-wrap:wrap}
+.ft-ns input{background:var(--bg);border:1px solid var(--g2);padding:12px 18px;border-radius:100px;color:var(--w);font-family:var(--bd);font-size:14px;min-width:200px}
+.ft-ns input:focus{outline:none;border-color:var(--acid)}
+.ft-nv{max-width:var(--max);margin:32px auto 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.ft-lk{display:flex;gap:8px 24px;flex-wrap:wrap}
+.ft-lk a{font-family:var(--hd);font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--g);transition:color .3s}
+.ft-lk a:hover{color:var(--acid)}
+.ft-so{display:flex;gap:12px}
+.ft-so a{width:36px;height:36px;border:1px solid var(--g2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--g);font-size:12px;font-family:var(--hd);font-weight:800;transition:border-color .3s,color .3s}
+.ft-so a:hover{border-color:var(--acid);color:var(--acid)}
+.ft-bt{max-width:var(--max);margin:24px auto 0;padding-top:20px;border-top:1px solid var(--g2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:11px;color:#444}
+@media(max-width:700px){.ft-top{flex-direction:column;align-items:flex-start}.ft-nv{flex-direction:column;align-items:flex-start}}
+
+/* Overlay + Checkout */
+.ov{position:fixed;inset:0;z-index:1000;background:rgba(8,8,8,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
+.ov.open{display:flex;opacity:1}
+.ovc{background:var(--bg2);border:1px solid var(--g2);border-radius:20px;padding:32px;max-width:480px;width:100%;max-height:92vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.ov.open .ovc{transform:translateY(0)}
+.ocl{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:var(--bg);border:1px solid var(--g2);font-size:20px;display:flex;align-items:center;justify-content:center;transition:border-color .3s,color .3s}
+.ocl:hover{border-color:var(--acid);color:var(--acid)}
+.ovc h3{font-family:var(--hd);font-weight:900;font-size:28px;text-transform:uppercase;margin-bottom:4px}
+.ovc .sub{color:var(--g);font-size:13px;margin-bottom:20px}
+.fd{margin-bottom:14px}
+.fd label{display:block;font-family:var(--hd);font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+.fd input{width:100%;background:var(--bg);border:1px solid var(--g2);padding:12px 14px;border-radius:8px;color:var(--w);font-family:var(--bd);font-size:14px;transition:border-color .3s}
+.fd input:focus{outline:none;border-color:var(--acid)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qty{display:flex;align-items:center;gap:16px}
+.qty button{width:40px;height:40px;border-radius:50%;background:var(--bg);border:1px solid var(--g2);font-size:18px;display:flex;align-items:center;justify-content:center;transition:border-color .3s,color .3s}
+.qty button:hover{border-color:var(--acid);color:var(--acid)}
+#qd{font-family:var(--hd);font-weight:900;font-size:24px;min-width:32px;text-align:center}
+.pm{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.pmi{padding:12px;border:1.5px solid var(--g2);border-radius:10px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s}
+.pmi.on{border-color:var(--acid);background:rgba(184,255,87,.06)}
+.pmi b{display:block;font-family:var(--hd);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.pmi.on b{color:var(--acid)}
+.pmi small{font-size:10px;color:var(--g);letter-spacing:.04em;text-transform:uppercase}
+.tot{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-top:1px solid var(--g2);margin-top:8px}
+.tot span:first-child{font-family:var(--hd);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--g)}
+#ta{font-family:var(--hd);font-weight:900;font-size:36px;color:var(--acid);letter-spacing:-.02em}
+#bb{width:100%;margin-top:12px;justify-content:center}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(140%);background:var(--acid);color:var(--bg);padding:16px 24px;border-radius:100px;font-family:var(--hd);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;z-index:2000;transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:0 20px 60px rgba(184,255,87,.35);max-width:90vw;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+/* Compare */
+.cpr{border:1px solid var(--g2);border-radius:16px;overflow:hidden}
+.cpr .r{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;border-bottom:1px solid var(--g2)}
+.cpr .r:last-child{border-bottom:none}
+.cpr .c{padding:20px 16px;font-size:13px;display:flex;align-items:center}
+.cpr .hd .c{font-family:var(--hd);font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase;background:var(--bg2);color:var(--g)}
+.cpr .c.ft{color:#bbb;font-weight:500}
+.cpr .r:not(.hd) .c:not(.ft){justify-content:center}
+.cs{background:rgba(184,255,87,.04);border-left:1px solid rgba(184,255,87,.25);border-right:1px solid rgba(184,255,87,.25)}
+.cpr .hd .cs{background:rgba(184,255,87,.12);color:var(--acid)}
+.tk{color:var(--acid);font-weight:900;font-size:16px}
+.xx{color:#555;font-size:16px}
+@media(max-width:700px){.cpr .c{padding:14px 8px;font-size:11px}.cpr .hd .c{font-size:10px}}
+
+/* FAQ */
+.fq{border-top:1px solid var(--g2);padding:24px 0;cursor:pointer}
+.fq:last-child{border-bottom:1px solid var(--g2)}
+.fqq{display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:var(--hd);font-weight:800;font-size:clamp(20px,2.5vw,28px);text-transform:uppercase;line-height:1.1}
+.fqt{font-size:24px;color:var(--acid);transition:transform .4s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+.fq.op .fqt{transform:rotate(45deg)}
+.fqa{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1),padding .4s,opacity .4s;color:#bbb;font-size:15px;line-height:1.7;opacity:0}
+.fq.op .fqa{max-height:500px;padding-top:16px;opacity:1}
+
+/* Anims */
+.js .au{opacity:0;transform:translateY(40px)}
+.js .hero-h .li{overflow:hidden;padding:.05em 0;display:block}
+.js .hero-h .ln{display:block;transform:translateY(110%);will-change:transform}
+.js .hero-ey,.js .hero-sub,.js .hero-ctas{opacity:0}
+@media(prefers-reduced-motion:reduce){.js .au,.js .hero-h .ln,.js .hero-ey,.js .hero-sub,.js .hero-ctas{opacity:1!important;transform:none!important}}
+@media(max-width:700px){.sc{padding:90px var(--pad)}.nv{padding:18px var(--pad)}}
+</style>
+<style>.blog-body h2{font-family:var(--hd);font-weight:900;font-size:clamp(24px,3vw,36px);color:var(--w);text-transform:uppercase;margin:48px 0 16px;letter-spacing:-.01em;line-height:1}.blog-body p{margin-bottom:20px}</style>
+</head>
+<body>
+<div class="cg" id="cur"></div><nav class="nv" id="nv">
+  <a href="smelloff-final.html" class="nv-l">smelloff</a>
+  <div class="nv-links">
+    <a href="smelloff-final.html">Home</a>
+    <a href="smelloff-product.html">Product</a>
+    <a href="smelloff-about.html">About</a>
+    <a href="smelloff-blog.html" style="color:var(--acid)">Blog</a>
+    <a href="smelloff-contact.html">Contact</a>
+  </div>
+  <button class="nv-c" onclick="oc()">Buy ₹159</button>
+  <button class="burger" onclick="tm()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mm">
+<a href="smelloff-final.html">Home</a><a href="smelloff-product.html">Product</a><a href="smelloff-about.html">About</a><a href="smelloff-blog.html">Blog</a><a href="smelloff-contact.html">Contact</a>
+<button class="btn bp" onclick="oc()" style="margin-top:16px;justify-content:center">Buy ₹159 <span class="ba">→</span></button>
+</div><article class="sc" style="padding-top:160px">
+  <div class="si" style="max-width:820px">
+    <a href="smelloff-blog.html" style="font-family:var(--hd);font-weight:800;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--acid);display:inline-block;margin-bottom:32px">← All Articles</a>
+    <div class="au" style="display:flex;gap:12px;align-items:center;margin-bottom:24px;flex-wrap:wrap">
+      <span style="font-family:var(--hd);font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--acid);padding:5px 12px;border:1px solid var(--acid);border-radius:100px">Laundry</span>
+      <span style="font-size:12px;color:var(--g)">April 2026 · 6 min read</span>
+    </div>
+    <h1 class="au" style="font-family:var(--hd);font-weight:900;font-size:clamp(40px,6vw,80px);line-height:.9;letter-spacing:-.025em;text-transform:uppercase;margin-bottom:32px">Why Clothes <em class='ac'>Smell</em> After Washing</h1>
+    <p class="au" style="font-size:20px;color:#ccc;line-height:1.6;margin-bottom:48px;font-weight:500">Washed yesterday. Folded neatly. Put it on this morning. By noon, it smells. Turns out, washing isn't the magic bullet most people think.</p>
+    <div class="au blog-body" style="color:#bbb;font-size:17px;line-height:1.8"><h2>Bacteria survive cold washes</h2><p>Standard detergents at room temperature don't kill all bacteria. They lift dirt but bacteria like Micrococcus survive cold water. They sit dormant, waiting for your sweat to reactivate them.</p><h2>Front-load washer mold</h2><p>Mold grows in the rubber gasket. Every wash transfers spores to clothes. Wipe the gasket weekly. Run a hot empty cycle with vinegar monthly.</p><h2>Too much detergent</h2><p>Excess detergent doesn't rinse out, leaving residue that traps body oils and bacteria. Use less than the cap suggests.</p><h2>Drying matters more than washing</h2><p>Wet clothes left in the machine start smelling within 4 hours. Tumble dry or hang immediately. Sun-dry when possible — UV is a natural disinfectant.</p><h2>6 fixes that work</h2><p>(1) Hot water wash once a week at 60°C. (2) Add vinegar to rinse cycle. (3) Don't overload the machine. (4) Dry immediately. (5) Sun-dry when possible. (6) Use a fabric odor mist between washes.</p><h2>The shortcut</h2><p>ODORSTRIKE handles what laundry misses. Spray before wearing, bacteria killed, smell gone for 12 hours.</p></div>
+    <div class="au" style="margin:64px 0;padding:36px;background:linear-gradient(135deg,rgba(184,255,87,.08),rgba(184,255,87,.02));border:1px solid var(--acid);border-radius:16px;text-align:center">
+      <div style="font-family:var(--hd);font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--acid);margin-bottom:12px">From the Founder</div>
+      <p style="font-size:17px;line-height:1.6;margin-bottom:20px;color:var(--w)">ODORSTRIKE is built for this. 50ml pocket size, ₹159, 300+ sprays, ships across India.</p>
+      <button class="btn bp" onclick="oc()">Buy ODORSTRIKE ₹159 <span class="ba">→</span></button>
+    </div>
+    <div class="au" style="margin-top:80px;padding-top:40px;border-top:1px solid var(--g2)">
+      <h3 style="font-family:var(--hd);font-weight:900;font-size:22px;text-transform:uppercase;margin-bottom:20px">Read Next</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px"><a href="smelloff-blog-deodorant-vs-perfume-vs-fabric-mist.html" style="display:block;background:var(--bg2);border:1px solid var(--g2);border-radius:12px;padding:20px;transition:border-color .3s;text-decoration:none;color:inherit"><div style="font-family:var(--hd);font-weight:800;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--acid);margin-bottom:6px">Guide</div><div style="font-family:var(--hd);font-weight:900;font-size:16px;text-transform:uppercase;line-height:1.1">Deodorant vs Perfume vs Fabric Mist</div></a><a href="smelloff-blog-remove-sweat-smell-tshirts.html" style="display:block;background:var(--bg2);border:1px solid var(--g2);border-radius:12px;padding:20px;transition:border-color .3s;text-decoration:none;color:inherit"><div style="font-family:var(--hd);font-weight:800;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--acid);margin-bottom:6px">Laundry</div><div style="font-family:var(--hd);font-weight:900;font-size:16px;text-transform:uppercase;line-height:1.1">Remove Sweat Smell from T-Shirts</div></a><a href="smelloff-blog-gym-bag-smell-fixes.html" style="display:block;background:var(--bg2);border:1px solid var(--g2);border-radius:12px;padding:20px;transition:border-color .3s;text-decoration:none;color:inherit"><div style="font-family:var(--hd);font-weight:800;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--acid);margin-bottom:6px">Lifestyle</div><div style="font-family:var(--hd);font-weight:900;font-size:16px;text-transform:uppercase;line-height:1.1">Gym Bag Smell: 7 Fixes That Work</div></a></div>
+    </div>
+  </div>
+</article><footer class="ft">
+  <div class="ft-top">
+    <div><div class="ft-b">smelloff</div><p style="color:var(--g);font-size:13px;max-width:300px">Pocket-sized fabric odor mist. Built in Hyderabad.</p></div>
+    <div class="ft-ns"><input type="email" id="ne" placeholder="your@email.com"><button class="btn bp" onclick="sn()" style="padding:12px 22px;font-size:12px">Subscribe <span class="ba">→</span></button></div>
+  </div>
+  <div class="ft-nv">
+    <div class="ft-lk"><a href="smelloff-final.html">Home</a><a href="smelloff-product.html">Product</a><a href="smelloff-about.html">About</a><a href="smelloff-blog.html">Blog</a><a href="smelloff-contact.html">Contact</a><a href="smelloff-shipping.html">Shipping</a><a href="smelloff-refund.html">Refund</a><a href="smelloff-privacy.html">Privacy</a><a href="smelloff-terms.html">Terms</a></div>
+    <div class="ft-so"><a href="https://instagram.com/smell0ff" target="_blank" rel="noopener">IG</a><a href="mailto:xbrainee@gmail.com">@</a></div>
+  </div>
+  <div class="ft-bt"><div>© 2026 Smelloff · Sanathnagar, Hyderabad — 500018</div><div>Made with sweat, in India</div></div>
+</footer><!-- ===== CHECKOUT ===== -->
+<div class="ov" id="ov">
+  <div class="ovc">
+    <button class="ocl" onclick="cc()" aria-label="Close">×</button>
+    <h3>Odorstrike</h3>
+    <p class="sub">50ml fabric odor mist · ₹159 launch</p>
+    <div class="fd"><label>Quantity</label><div class="qty"><button onclick="sq(-1)">−</button><span id="qd">1</span><button onclick="sq(1)">+</button></div></div>
+    <div class="fr"><div class="fd"><label>Name</label><input id="cn" placeholder="Your name"></div><div class="fd"><label>Phone</label><input id="cp" placeholder="10-digit" maxlength="10" inputmode="numeric"></div></div>
+    <div class="fd"><label>Email</label><input id="ce" type="email" placeholder="you@email.com"></div>
+    <div class="fd"><label>Address</label><input id="ca" placeholder="House, street, area"></div>
+    <div class="fr"><div class="fd"><label>City</label><input id="ci" placeholder="City"></div><div class="fd"><label>Pincode</label><input id="cpi" placeholder="500018" maxlength="6" inputmode="numeric"></div></div>
+    <div class="fd"><label>Payment</label>
+      <div class="pm">
+        <div class="pmi on" id="pr" onclick="sp('r')"><b>Razorpay</b><small>UPI · Card · Net</small></div>
+        <div class="pmi" id="pc" onclick="sp('c')"><b>Cash on Delivery</b><small>Pay when it arrives</small></div>
+      </div>
+    </div>
+    <div class="tot"><span>Total</span><span id="ta">₹159</span></div>
+    <button id="bb" class="btn bp" style="width:100%;justify-content:center;margin-top:12px">Pay with Razorpay <span class="ba">→</span></button>
+  </div>
+</div>
+<div class="toast" id="tt"></div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var C={KEY:"rzp_test_XXXXXXXXXXXXXXX",P:159,PROD:"ODORSTRIKE — 50ml",SHEET:"https://script.google.com/macros/s/AKfycbw8hsdMQ8YnhIvZ-6-Eljfd7_YDDgEzmw4Dh5miJBPvRpU5OSmaxT8e0-CXvgsf-OkDtA/exec"};
+var q=1,pm="r",ords=[];try{ords=JSON.parse(localStorage.getItem("so_o")||"[]")}catch(e){}
+function $(i){return document.getElementById(i)}
+function oc(){$("ov").classList.add("open");document.body.style.overflow="hidden"}
+function cc(){$("ov").classList.remove("open");document.body.style.overflow=""}
+function sq(d){q=Math.max(1,Math.min(10,q+d));$("qd").textContent=q;$("ta").textContent="₹"+(C.P*q)}
+function sp(m){pm=m;$("pr").classList.toggle("on",m==="r");$("pc").classList.toggle("on",m==="c");$("bb").innerHTML=(m==="c"?"Place COD Order":"Pay with Razorpay")+' <span class="ba">→</span>'}
+function tt(m,d){var t=$("tt");t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},d||3000)}
+function tm(){$("mm").classList.toggle("open")}
+function sn(){var e=$("ne").value.trim();if(!e||e.indexOf("@")<0){tt("Enter valid email");return}fetch(C.SHEET+"?email_capture=true&email="+encodeURIComponent(e)+"&source=footer&date="+encodeURIComponent(new Date().toISOString()),{method:"GET",mode:"no-cors"}).catch(function(){});$("ne").value="";tt("You're in! Welcome to the strike squad.")}
+$("ov").addEventListener("click",function(e){if(e.target===this)cc()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")cc()});
+$("bb").onclick=function(){var n=$("cn").value.trim(),p=$("cp").value.trim(),e=$("ce").value.trim(),a=$("ca").value.trim(),c=$("ci").value.trim(),pi=$("cpi").value.trim();
+if(!n||!p||!e||!a||!c||!pi){tt("Fill all fields");return}if(p.length!==10){tt("10-digit phone needed");return}if(pi.length!==6){tt("6-digit pincode needed");return}
+var amt=C.P*q,id="SO-"+Date.now().toString(36).toUpperCase();
+var save=function(pid){var o={id:id,pid:pid,q:q,a:amt,s:"processing",d:new Date().toISOString().split("T")[0],pin:pi,n:n,ph:p,e:e,addr:a,city:c,pay:pm==="c"?"cod":"rzp"};ords.push(o);try{localStorage.setItem("so_o",JSON.stringify(ords))}catch(x){}
+fetch(C.SHEET+"?order_id="+encodeURIComponent(o.id)+"&payment_id="+encodeURIComponent(o.pid)+"&qty="+o.q+"&amount="+o.a+"&name="+encodeURIComponent(o.n)+"&phone="+encodeURIComponent(o.ph)+"&email="+encodeURIComponent(o.e)+"&address="+encodeURIComponent(o.addr)+"&city="+encodeURIComponent(o.city)+"&pincode="+encodeURIComponent(o.pin)+"&payment="+o.pay+"&date="+encodeURIComponent(o.d),{method:"GET",mode:"no-cors"}).catch(function(){});
+cc();tt("Order placed! "+id,5000);if(window.fbq)fbq("track","Purchase",{value:amt,currency:"INR"});if(window.gtag)gtag("event","purchase",{transaction_id:id,value:amt,currency:"INR"})};
+if(pm==="c"){save("COD")}else{if(typeof Razorpay==="undefined"){tt("Payment loading, try again");return}new Razorpay({key:C.KEY,amount:amt*100,currency:"INR",name:"Smelloff",description:C.PROD+" x"+q,prefill:{name:n,email:e,contact:p},theme:{color:"#B8FF57",backdrop_color:"#080808"},handler:function(r){save(r.razorpay_payment_id)},modal:{ondismiss:function(){tt("Payment cancelled")}},notes:{product:"ODORSTRIKE 50ml",qty:String(q)}}).open()}};
+
+/* Nav scroll */
+window.addEventListener("scroll",function(){$("nv").classList.toggle("sc",window.scrollY>40)},{passive:true});
+
+/* Motion */
+document.documentElement.classList.add("js");
+window.addEventListener("load",function(){
+var G=typeof gsap!=="undefined",L=typeof Lenis!=="undefined",R=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+if(!G||R){document.querySelectorAll(".au,.hero-h .ln,.hero-ey,.hero-sub,.hero-ctas").forEach(function(e){e.style.opacity="1";e.style.transform="none"});return}
+if(L){try{var ln=new Lenis({duration:1.15,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t))},smoothWheel:true,touchMultiplier:1.5});(function r(t){ln.raf(t);requestAnimationFrame(r)})(0);gsap.registerPlugin(ScrollTrigger);ln.on("scroll",ScrollTrigger.update)}catch(e){gsap.registerPlugin(ScrollTrigger)}}else{gsap.registerPlugin(ScrollTrigger)}
+
+/* Hero */
+var tl=gsap.timeline({defaults:{ease:"power3.out"}});
+tl.to(".hero-ey",{opacity:1,duration:.8},.1).to(".hero-h .ln",{y:"0%",duration:1.2,stagger:.12},.2).to(".hero-sub",{opacity:1,duration:.9},.9).to(".hero-ctas",{opacity:1,duration:.9},1);
+
+/* Cursor */
+var cr=$("cur");if(cr&&window.matchMedia("(hover:hover)and(pointer:fine)").matches){var mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY},{passive:true});(function t(){cx+=(mx-cx)*.13;cy+=(my-cy)*.13;cr.style.transform="translate3d("+cx+"px,"+cy+"px,0)";requestAnimationFrame(t)})()}
+
+/* Marquee */
+gsap.to(".mq-t",{xPercent:-50,duration:35,ease:"none",repeat:-1});
+
+/* .au reveals */
+gsap.utils.toArray(".au").forEach(function(el){gsap.to(el,{opacity:1,y:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none none"}})});
+
+/* Stat counters */
+document.querySelectorAll("[data-t]").forEach(function(el){var t=parseInt(el.dataset.t,10);if(isNaN(t))return;var n=el.querySelector(".nm");if(!n)return;var o={v:0};ScrollTrigger.create({trigger:el,start:"top 88%",once:true,onEnter:function(){gsap.to(o,{v:t,duration:1.8,ease:"power2.out",onUpdate:function(){n.textContent=Math.round(o.v)}})}})});
+
+/* Magnetic buttons - desktop */
+if(window.matchMedia("(hover:hover)and(pointer:fine)").matches){document.querySelectorAll(".btn").forEach(function(b){b.addEventListener("mousemove",function(e){var r=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.18,duration:.5,ease:"power2.out",overwrite:"auto"})});b.addEventListener("mouseleave",function(){gsap.to(b,{x:0,y:0,duration:.6,ease:"elastic.out(1,.5)",overwrite:"auto"})})})}
+
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){ScrollTrigger.refresh()});
+});
+</script>
+</body>
+</html>
